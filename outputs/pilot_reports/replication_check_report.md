@@ -17,7 +17,7 @@
 - subject and subject-grade action counts
 - adjacent-grade anchor-pair counts, usable-anchor counts, final-anchor counts, and chain-edge flags
 - within-form IRT model fallback decisions by refitting 2PL and 1PL models
-- canonical report hygiene after retiring `internal_research_report.md`
+- canonical report hygiene after retiring obsolete internal/ministry artifacts
 
 ## Check Summary
 
@@ -34,12 +34,12 @@
 | `action_grade_summary` | `pass` | 0 |
 | `anchor_pair_summary` | `pass` | 0 |
 | `irt_refit` | `pass` | 0 |
-| `canonical_internal_report` | `pass` | 0 |
+| `canonical_report_hygiene` | `pass` | 0 |
 
 ## Errors Found And Fixes
 
 - No analytic discrepancies were found in the replicated calculations or IRT fallback decisions.
-- The only issue found during this pass was output hygiene: the old shorter `internal_research_report.md` was still being generated and present after we decided to keep only `team_full_report.md` as the internal report. I fixed this by removing the file, removing it from the reporting script output, and updating the pipeline README to list `team_full_report.md` as the canonical internal report.
+- Cleanup issues addressed: the old shorter `internal_research_report.md`, the ministry brief/queue files, the one-off requested-item lookup, and `.DS_Store` were obsolete. I removed those files, stopped the pipeline from regenerating the ministry outputs, and updated the pipeline README to list only the current internal report outputs.
 
 ## Notes
 

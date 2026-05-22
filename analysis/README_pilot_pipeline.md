@@ -29,8 +29,7 @@ The runner sets `PROJECT_ROOT` and `PILOT_DATA_PATH` for all downstream scripts.
      - `keep_but_fix_administration`
      - `replace`
 4. `pilot_reporting.py`
-   - Writes the external ministry brief.
-   - Writes supporting priority queues for follow-up.
+   - Writes report-supporting action counts.
 
 ## Counting convention
 
@@ -49,8 +48,6 @@ The runner sets `PROJECT_ROOT` and `PILOT_DATA_PATH` for all downstream scripts.
 ## Reporting outputs
 
 - `outputs/pilot_reports/team_full_report.md`
-- `outputs/pilot_reports/ministry_brief.md`
-- `outputs/pilot_reports/ministry_priority_action_queue.csv`
 - `outputs/pilot_reports/action_counts_by_subject_grade.csv`
 
 ## Independent replication check
