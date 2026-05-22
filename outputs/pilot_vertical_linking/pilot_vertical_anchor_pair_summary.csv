@@ -1,0 +1,16 @@
+"subject","grade_pair","shared_items","usable_anchor_candidates","final_anchors","chain_edge"
+"Arabic","g1-g2",3,0,0,FALSE
+"Arabic","g2-g3",9,2,2,TRUE
+"Arabic","g3-g4",7,7,7,TRUE
+"Arabic","g4-g5",4,3,3,TRUE
+"Arabic","g5-g6",14,6,2,TRUE
+"French","g1-g2",9,3,3,TRUE
+"French","g2-g3",50,23,23,TRUE
+"French","g3-g4",11,8,8,TRUE
+"French","g4-g5",32,11,9,TRUE
+"French","g5-g6",32,9,9,TRUE
+"Maths","g1-g2",5,1,1,FALSE
+"Maths","g2-g3",6,3,3,TRUE
+"Maths","g3-g4",6,5,3,TRUE
+"Maths","g4-g5",6,4,4,TRUE
+"Maths","g5-g6",4,2,1,FALSE

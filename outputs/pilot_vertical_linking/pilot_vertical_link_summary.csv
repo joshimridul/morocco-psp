@@ -1,0 +1,7 @@
+"subject","chain_id","grades","linked_across_multiple_grades","n_students","n_linked_items","n_anchor_items_used","n_linked_anchor_columns","model_used","converged","fit_reason"
+"Arabic","arabic_chain1","1",FALSE,179,52,0,0,"1PL",TRUE,"2PL_failed: 2PL_bad_discrimination | 1PL: ok"
+"Arabic","arabic_chain2","2,3,4,5,6",TRUE,990,149,14,14,"1PL",TRUE,"2PL_failed: 2PL_bad_discrimination | 1PL: ok"
+"French","french_chain1","1,2,3,4,5,6",TRUE,1184,193,29,30,"1PL",TRUE,"2PL_failed: not_converged | 1PL: ok"
+"Maths","maths_chain1","1",FALSE,180,26,0,0,"2PL",TRUE,"ok"
+"Maths","maths_chain2","2,3,4,5",TRUE,789,107,10,10,"1PL",TRUE,"2PL_failed: not_converged | 1PL: ok"
+"Maths","maths_chain3","6",FALSE,185,26,0,0,"1PL",TRUE,"2PL_failed: not_converged | 1PL: ok"

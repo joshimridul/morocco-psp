@@ -1,0 +1,30 @@
+subject,grade,item,recommendation,reason,item_label,p_treated,p_control,response_rate_all,corrected_item_total
+French,1,f22,keep_but_fix_administration,low_coverage_missing_drives_difficulty,TU ES EN QUELLE CLASSE ?,0.31,0.0631578947368421,0.287179487179487,0.431644564765323
+French,1,f221,no_specific_change,not_flagged_in_revised_action_sheet,LIS LES LETTRES SUIVANTES A VOIX HAUTE:E,0.74,0.473684210526316,0.825641025641026,0.567016584710754
+French,4,f2129,no_specific_change,not_flagged_in_revised_action_sheet,"C'EST AMINE SUR LES IMAGES. ECRIS UNE PHRASE POUR DECRIRE L'IMAGE, COMME DANS L'",0.2,0.1,0.47,0.44097888563119
+French,5,f2129,keep_but_fix_administration,low_coverage_missing_drives_difficulty,"C'EST AMINE SUR LES IMAGES. ECRIS UNE PHRASE POUR DECRIRE L'IMAGE, COMME DANS L'",0.242105263157895,0.17,0.435897435897436,0.63293244371149
+French,6,f2129,no_specific_change,not_flagged_in_revised_action_sheet,"C'EST AMINE SUR LES IMAGES. ECRIS UNE PHRASE POUR DECRIRE L'IMAGE, COMME DANS L'",0.221052631578947,0.15,0.528205128205128,0.577826814733693
+French,6,f2130,no_specific_change,not_flagged_in_revised_action_sheet,"C'EST AMINE SUR LES IMAGES. ECRIS UNE PHRASE POUR DECRIRE L'IMAGE, COMME DANS L'",0.410526315789474,0.27,0.748717948717949,0.60159445033623
+Maths,1,m21_nv,replace,ceiling_with_limited_incremental_value,"Read numbers : 6, 0, 3, 9, 2, 8, 1, 4, 7, 5",0.968421052631579,0.88235294117647,0.994444444444444,0.512799394388212
+Maths,2,m233_nv,no_specific_change,not_flagged_in_revised_action_sheet,Write the appropriate number under each illustration : (135),0.48,0.35,0.8,0.668843725174857
+Maths,3,m278_nv3,replace,treated_below_control_anomaly,What is the title of the story that was read by 1 student only?,0.585858585858586,0.74,0.869346733668342,0.499299747184058
+Arabic,1,a13y3_nv3,replace,ceiling_with_limited_incremental_value,Describe what you see in the picture: Where is the boy going?,0.936842105263158,0.880952380952381,0.983240223463687,0.3291217921082
+Arabic,1,a116y3_nv3,no_specific_change,not_flagged_in_revised_action_sheet,Read the letters,0.894736842105263,0.761904761904762,1.0,0.577175987856338
+Arabic,1,a117y3_nv3,replace,ceiling_with_limited_incremental_value,Read the letters,0.978947368421053,0.916666666666667,0.994413407821229,0.488745182003181
+Arabic,1,a118y3_nv3,replace,ceiling_with_limited_incremental_value,Read the letters,0.968421052631579,0.916666666666667,1.0,0.566422869000966
+Arabic,1,a120y3_nv3,replace,ceiling_with_limited_incremental_value,Read the letters,0.926315789473684,0.821428571428571,1.0,0.651878164022573
+Arabic,1,a121y3_nv3,replace,ceiling_with_limited_incremental_value,Read the letters,0.936842105263158,0.857142857142857,0.966480446927374,0.609431668647209
+Arabic,1,a122y3_nv3,replace,ceiling_with_limited_incremental_value,Read the letters,1.0,0.94047619047619,1.0,0.369453173418426
+Arabic,1,a125y3_nv3,replace,ceiling_with_limited_incremental_value,Read the words,0.926315789473684,0.845238095238095,0.949720670391061,0.753691643304946
+Arabic,1,a127y3_nv3,keep_for_causal_signal,foundational_causal_signal_item,Read the words,0.91578947368421,0.738095238095238,0.932960893854749,0.821953933806495
+Arabic,2,a256,no_specific_change,not_flagged_in_revised_action_sheet,Reading comprehension text .Put a mark (x) in front of the correct statement (Th,0.44,0.41,0.95,0.249461383061403
+Arabic,2,a257,no_specific_change,not_flagged_in_revised_action_sheet,Reading comprehension text .Put a mark(x) in front of the correct statement (Why,0.41,0.28,0.95,0.264287514058778
+Arabic,2,a258_nv,keep_as_stretch,useful_upper_tail_item,Arrange the events (images) from 1 to 4 according to their sequence in the story,0.33,0.28,0.98,0.211958928598776
+Arabic,2,a321y3_nv3,no_specific_change,not_flagged_in_revised_action_sheet,write this word (dictation word) with the diacritical marks (vowel signs) (he em,0.89,0.8,0.99,0.444728404569917
+Arabic,2,a322y3_nv3,no_specific_change,not_flagged_in_revised_action_sheet,write this word (dictation word) with the diacritical marks (vowel signs) (Salim,0.58,0.61,0.99,0.531521153966654
+Arabic,3,a289,no_specific_change,not_flagged_in_revised_action_sheet,Reading comprehension text .Put a mark under the diagram. What is the picture th,0.73,0.67,0.975,0.412222902718163
+Arabic,3,a290,no_specific_change,not_flagged_in_revised_action_sheet,Reading comprehension text Mark (X) in front of the correct statement : The arts,0.66,0.44,0.99,0.469796639577446
+Arabic,3,a291,keep_as_stretch,useful_upper_tail_item,Reading comprehension text Mark (X) in front of the general idea of the text (th,0.35,0.27,0.985,0.381170148674491
+Arabic,3,a421y3_nv3,no_specific_change,not_flagged_in_revised_action_sheet,Composing simple sentences based on untidy words: Nature became beautiful after,0.47,0.24,0.975,0.51894039514996
+Arabic,3,a297,no_specific_change,not_flagged_in_revised_action_sheet,Complete the story: Imagine the rest of the story based on this beginning (Talk,0.55,0.51,0.815,0.585244863289226
+Arabic,5,a2137,replace,ceiling_with_limited_incremental_value,Take the floor and speak freely about the end of the year party: mention the act,0.968421052631579,0.95,0.97948717948718,0.329859828236442
