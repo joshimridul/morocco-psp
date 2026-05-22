@@ -1,25 +1,22 @@
 # Morocco PSP Endline Pilot: Full Internal Team Report
 
 - Date: `2026-05-22`
-- Audience: internal research team
-- Main data file: `/Users/mriduljoshi/Dropbox/DID - Morocco Pioneer Schools Year 3/4 - Data processing/03_Pilot/Clean/pilot_clean_20260518_mji.dta`
-- Item map used for question text and anchor review: [Item_map_20250517_mji.xlsx](</Users/mriduljoshi/Dropbox/DID - Morocco Pioneer Schools Year 3/3 - Data collection/02_Endline_Pilot/3 - Item map/Item_map_20250517_mji.xlsx>)
-- Missing responses are counted as incorrect throughout the item analysis and IRT work.
-- All item references in this report use the original `item` IDs from the cleaned pilot file.
+- Audience: PSP research team only
+- Main data file: `DID - Morocco Pioneer Schools Year 3/4 - Data processing/03_Pilot/Clean/pilot_clean_20260518_mji.dta`
+- Item map used for question text and anchor review: [Item_map_20250517_mji.xlsx](</DID - Morocco Pioneer Schools Year 3/3 - Data collection/02_Endline_Pilot/3 - Item map/Item_map_20250517_mji.xlsx>)
 
 ## Purpose
 
-This report consolidates the full internal pilot review into one document for the research team. It brings together:
+This report consolidates the full internal pilot review into one document for the research team, including:
 
-- the form-level psychometric scan
+- the form-level psychometric analysis
 - the easy/hard item review with missing counted as incorrect
-- the revised item-action rules that reflect both measurement and causal objectives
 - the IRT and vertical-linking results
 - the operational guidance for `fix administration`
-- the maths anomaly review and substitute-item drafting logic
-- the anchor-gap diagnosis and concrete anchor recommendations
+- the maths anomaly review 
+- the substitute item list for maths
+- the anchor-gap diagnosis
 
-The core framing throughout is that this is not only a measurement exercise. It is also a causal inference exercise in a treated versus control setting at endline. That means some easy items remain useful if they capture real treatment-driven mastery gains, even if they add limited upper-tail information. At the same time, we still need enough stretch items to avoid ceiling effects and estimate impacts near the top of the treated distribution.
 
 ## Executive Summary
 
@@ -56,11 +53,7 @@ The core framing throughout is that this is not only a measurement exercise. It 
   - truly difficult items
   - items that only look difficult because they were not asked, not completed, or not recorded consistently
 
-### Why the treated group matters
-
-The ultimate objective is causal: estimating and understanding effects for pioneer schools relative to control schools. Because of that, we did not want the control group to mechanically drive all easy/hard decisions. If an item is easy in treated schools but much less easy in control schools, that can still be a useful causal signal even if the item contributes little to upper-tail measurement in the treated group.
-
-This led to the revised dual-objective classification:
+### Classification of item
 
 - `keep_as_stretch`: hard enough to measure stronger students and avoid ceiling effects
 - `keep_for_causal_signal`: easy for treated students, but still shows meaningful treated-control separation
@@ -71,13 +64,9 @@ This led to the revised dual-objective classification:
 
 ### Ceiling rule used in the final outputs
 
-We changed the ceiling logic after discussion because automatically replacing any item above `90%` in treated schools would throw away some useful causal items.
-
-Final rule:
-
 - `shared ceiling` means both treated and control are at ceiling or near-ceiling. These are high-priority `replace` items.
 - `treated-only ceiling` means treated is at ceiling or near-ceiling but control is not. These are `review_treated_only_ceiling`, not automatic replace.
-- Easy items with strong treated-control gaps can be retained as `keep_for_causal_signal`.
+- Easy items with strong treated-control gaps can be retained as `keep_for_causal_signal`, because they are likely picking up causal effects.
 
 This matters especially in Maths and early Arabic, where some easy items capture real pioneer-school mastery gains even if they contribute less information at the top of the treated distribution.
 
@@ -197,7 +186,7 @@ What the Maths item review says:
 
 Interpretation:
 
-- Maths already has enough stretch items. We do not need more difficulty for its own sake.
+- Maths already has enough stretch items. 
 - What we need is better-functioning difficulty.
 - After revising the clearly shared-ceiling items and the nonfunctioning hard items, the top end of Maths measurement remains adequately populated.
 
@@ -213,7 +202,7 @@ So the target form architecture should contain:
 - some middle items that measure the body of the distribution
 - some stretch items that keep the top end open
 
-The goal is not to remove all easy items. The goal is to remove:
+The goal is to remove:
 
 - items that are easy in both groups and add little value
 - items that are too hard to function
@@ -317,7 +306,7 @@ And two Maths items that should be softened slightly rather than fully replaced:
 
 ## Maths Item Substitutes
 
-We drafted substitute Maths items using the item map and the underlying skill/question-type logic. The purpose was not to change the construct, but to capture the same skill in a way that functions better psychometrically.
+We drafted substitute Maths items using the item map and the underlying skill/question-type logic. The purpose was not to change the construct, but to capture the same skill in a way that (hopefully) functions better psychometrically.
 
 The draft table is here:
 
@@ -329,7 +318,7 @@ The replacement logic used there is:
 - preserve the same underlying skill
 - preserve the question type where possible
 - adjust the numerical values, prompt framing, or structure so the item is less anomalous, less overshot, or less ceiling-prone
-- be careful with common items that are reused across grades, because changing them in one grade only can weaken the anchor structure
+- be careful with common items that are reused across grades, because changing them in one grade only can weaken the anchor structure (anchors are very important!)
 
 ## Vertical Linking And Anchor Implications
 
@@ -527,12 +516,3 @@ Replication and QA:
 - [replication_check_details.csv](/Users/mriduljoshi/Github/morocco-psp/outputs/pilot_reports/replication_check_details.csv)
 - [replication_irt_refit_summary.csv](/Users/mriduljoshi/Github/morocco-psp/outputs/pilot_reports/replication_irt_refit_summary.csv)
 
-## Bottom Line
-
-The pilot does not point to one generic problem. It points to three different jobs:
-
-- in Arabic, harden the easy early-grade forms and fix completion in upper grades
-- in French, fix administration first
-- in Maths, keep the stretch layer but replace the hard items that overshoot or behave anomalously
-
-At the instrument level, the biggest technical design problem now is the anchor structure in Arabic and Maths. At the operational level, the biggest administration problem is French and upper-grade Arabic completion. At the causal-inference level, the key principle is to preserve a mix of foundational causal-signal items and upper-tail stretch items rather than optimizing only for one or the other.
