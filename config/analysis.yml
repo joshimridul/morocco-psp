@@ -1,0 +1,24 @@
+# These are provisional screening warnings, not automatic retention rules.
+seed: 20260804
+primary_analysis_language: R
+cluster_id_preference:
+  - school_id
+  - class_id
+validation_split_unit_preference:
+  - wave
+  - school_id
+bootstrap_replicates: 1000
+screening_flags:
+  minimum_valid_n_warn: 100
+  missing_rate_warn: 0.05
+  not_reached_rate_warn: 0.03
+  dichotomous_p_low_warn: 0.05
+  dichotomous_p_high_warn: 0.95
+  corrected_item_rest_warn: 0.15
+  distractor_selection_share_warn: 0.01
+rules:
+  thresholds_are_automatic_exclusions: false
+  select_items_using_treatment_effects: false
+  require_exact_operational_match_for_anchor: true
+  preserve_testlet_and_rubric_structure: true
+  require_score_tieout_before_modeling: true

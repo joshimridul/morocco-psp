@@ -1,0 +1,14 @@
+# Copy this file to config/paths.local.yml and replace the placeholders.
+# config/paths.local.yml is private and must never be committed.
+
+dropbox:
+  y1_root: "/absolute/local/path/to/DiD - Morocco Pioneer School"
+  y2_root: "/absolute/local/path/to/DID - Morocco Pioneer Schools Year 2"
+  y3_root: "/absolute/local/path/to/DID - Morocco Pioneer Schools Year 3"
+  work_root: "/absolute/local/path/to/Morocco Assessment Psychometrics - Working"
+
+# Optional local executable paths. Keep machine-specific values out of Git.
+software:
+  stata: null
+  rscript: null
+  python: null
