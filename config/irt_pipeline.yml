@@ -1,0 +1,75 @@
+# Frozen measurement specification and prespecified robustness grid.
+#
+# `required: true` means that the one-click pipeline stops if the command fails.
+# `eligible: false` means the run is retained as a diagnostic but is quarantined
+# from the correlation matrices and future regressions.
+version: 1
+seed: 20260804
+
+primary_method: concurrent_subject_all_final
+minimum_pairwise_correlation_n: 100
+correlation_warning_threshold: 0.98
+
+joint_factorial:
+  # Complete Cartesian product of the scientifically admissible choices:
+  # 2 anchor rules x 2 calibration samples x 2 pooling scopes.
+  anchor_modes:
+    - strict_summary
+    - purified_andy_core_math_bridge5
+  sample_modes:
+    - all
+    - comparison_only
+  model_scopes:
+    - subject_pooled_mixture
+    - grade_specific_mixture
+
+additional_joint_runs:
+  # These isolate anchor-set or held-out-sample decisions. The provisional-ID
+  # model is deliberately estimated but quarantined if it does not converge.
+  - anchor_mode: purified_strict
+    sample_mode: all
+    model_scope: subject_pooled_mixture
+    role: anchor_sensitivity_broad
+    eligible: true
+  - anchor_mode: purified_andy_core
+    sample_mode: all
+    model_scope: subject_pooled_mixture
+    role: anchor_sensitivity_andy_core
+    eligible: true
+  - anchor_mode: provisional_id
+    sample_mode: all
+    model_scope: subject_pooled_mixture
+    role: deliberately_permissive_anchor_stress_test
+    eligible: false
+  - anchor_mode: purified_andy_core_math_bridge5
+    sample_mode: development_schools
+    model_scope: subject_pooled_mixture
+    role: school_holdout_validation
+    eligible: true
+
+node_link_runs:
+  direct:
+    - strict_summary
+    - provisional_id
+  chained:
+    - strict_summary
+    - provisional_id
+
+plain_scores:
+  standardizations:
+    - plain_code
+    - plain_report_grade
+  sample_variants:
+    - listed_panel
+    - all_panel
+    - listed_consistent_metadata
+
+rules:
+  binary_items_only: true
+  tagged_a_is_incorrect: true
+  ordinary_missing_remains_missing: true
+  treatment_used_for_item_selection: false
+  preserve_y1_item_parameters: true
+  y1_reference_population: endline_comparison
+  primary_subject_structure: separate_subject_models
+  unrestricted_multigroup_status: quarantined_bounded_runtime_failure

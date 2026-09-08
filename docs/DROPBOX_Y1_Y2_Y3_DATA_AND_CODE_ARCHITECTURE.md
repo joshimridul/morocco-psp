@@ -24,7 +24,11 @@ The following are decisions supplied by the project lead and are not questions f
 - Raw data are immutable. They will never be edited, renamed, moved, deleted, or overwritten.
 - The legacy Year 1, Year 2, and Year 3 folder trees are shared project records. Codex must not reorganize them.
 - All **new analysis code, tests, documentation, and configuration templates** belong in a new GitHub repository.
-- No student-level data, raw extracts, clean analytic data, master keys, item forms, answer keys, secure item text, or data-bearing outputs are to be committed to GitHub.
+- No student-level data, raw extracts, clean analytic data, master keys, item
+  forms, answer keys, secure item text, or data-bearing outputs are to be
+  committed to GitHub. Project-lead-approved item maps may be tracked when
+  they are limited to reproducibility metadata and contain no student data or
+  secure item content.
 - All new derived datasets and data-bearing outputs must remain in Dropbox, but in a **separate dedicated working root**, not inside the legacy Y1, Y2, or Y3 trees.
 - The immediate analysis is Year 3 only.
 - The Year 1–Year 3 pooled or linked IRT work is a later phase.

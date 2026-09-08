@@ -16,6 +16,30 @@ screening_flags:
   dichotomous_p_high_warn: 0.95
   corrected_item_rest_warn: 0.15
   distractor_selection_share_warn: 0.01
+anchor_purification:
+  minimum_common_items: 5
+  minimum_rest_items_answered: 3
+  minimum_group_n: 50
+  minimum_cluster_n_for_automatic_flag: 10
+  maximum_iterations: 3
+  multiplicity_method: holm
+  alpha: 0.05
+  uniform_odds_ratio_lower: 0.67
+  uniform_odds_ratio_upper: 1.50
+  nonuniform_logit_coefficient_abs: 0.50
+  incremental_pseudo_r2: 0.02
+  mantel_haenszel_delta_abs: 1.00
+  required_link_bridge_sensitivity:
+    minimum_retained_anchors_per_link: 5
+    minimum_graph_link_anchors: 4
+    detector_rule: joint_logistic_and_mantel_haenszel
+    ranking_rule: weakest_adjusted_p_then_material_severity
+    status: transparent_connectivity_floor_for_required_nodes
+irt_optimization:
+  calibration_max_cycles: 1500
+  primary_calibration_max_cycles: 4000
+  node_distribution_max_cycles: 1000
+  estimated_discrimination_upper_bound: 10
 rules:
   thresholds_are_automatic_exclusions: false
   select_items_using_treatment_effects: false

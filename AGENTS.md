@@ -29,7 +29,10 @@ Until the project lead explicitly authorizes the legacy-code phase:
 
 1. Treat the Year 1, Year 2, and Year 3 Dropbox roots as read-only source systems. Never edit, overwrite, rename, move, delete, archive, or reorganize any file in them.
 2. Never write a generated file anywhere under the three legacy roots. All data-bearing outputs belong under the dedicated Dropbox `work_root` configured in `config/paths.local.yml`.
-3. New code, tests, documentation, and configuration templates belong in GitHub. No data, item maps, instruments, answer keys, secure item text, direct identifiers, or data-bearing outputs belong in GitHub.
+3. New code, tests, documentation, configuration templates, and
+   project-lead-approved metadata-only item maps belong in GitHub. No student
+   data, instruments, answer keys, secure item text, direct identifiers, or
+   data-bearing outputs belong in GitHub.
 4. Never print or export direct identifiers. Stop and flag any apparent identifying fields or any need to enter a PII/master-key directory.
 5. Build and verify a source registry with hashes before analysis. A file is not canonical merely because it is in `Clean`, has the latest date, or appears in a replication package.
 6. Never silently select a Dropbox conflicted copy, recovered file, archive version, or draft.

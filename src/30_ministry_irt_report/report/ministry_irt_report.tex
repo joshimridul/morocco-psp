@@ -1,0 +1,54 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage[font=small,labelfont=bf,textfont=it]{caption}
+\usepackage{microtype}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=blue}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\newcommand{\TableNote}[1]{%
+  \par\vspace{0.45em}\begin{minipage}{\linewidth}\scriptsize\justifying
+  \textit{Note:} #1 Standard significance markers are
+  $^{*}p<0.10$, $^{**}p<0.05$, and $^{***}p<0.01$. A dagger marks an estimate
+  based on fewer than 20 matched-pair clusters.
+  \end{minipage}}
+\newcommand{\PlainTableNote}[1]{%
+  \par\vspace{0.45em}\begin{minipage}{\linewidth}\scriptsize\justifying
+  \textit{Note:} #1
+  \end{minipage}}
+
+\title{Scaling Education Reform:\\Evidence from Morocco's Pioneer School Program\\[1.2em]Year 3 IRT Results}
+\author{}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\clearpage
+\input{tables/01_headline.tex}
+\clearpage
+\input{tables/02_stable.tex}
+\clearpage
+\input{tables/03_gender.tex}
+\clearpage
+\input{tables/04_baseline.tex}
+\clearpage
+\input{tables/05_grade_1year.tex}
+\clearpage
+\input{tables/06_grade_2year.tex}
+\clearpage
+\input{tables/07_grade_3year.tex}
+
+\clearpage
+\appendix
+\input{irt_technical_appendix.tex}
+
+\end{document}

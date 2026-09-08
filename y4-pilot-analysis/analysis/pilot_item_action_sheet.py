@@ -5,8 +5,9 @@ import pandas as pd
 
 
 BASE_DIR = Path(os.getenv("PROJECT_ROOT", "/Users/mriduljoshi/Github/morocco-psp"))
-INPUT_PATH = BASE_DIR / "outputs" / "pilot_psychometrics" / "pilot_item_summary.csv"
-OUTPUT_DIR = BASE_DIR / "outputs" / "pilot_item_actions"
+OUTPUT_ROOT = Path(os.environ["PILOT_OUTPUT_ROOT"])
+INPUT_PATH = OUTPUT_ROOT / "pilot_psychometrics" / "pilot_item_summary.csv"
+OUTPUT_DIR = OUTPUT_ROOT / "pilot_item_actions"
 
 
 def classify(row: pd.Series) -> tuple[str | None, str | None]:

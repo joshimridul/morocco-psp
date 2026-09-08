@@ -5,9 +5,10 @@ import pandas as pd
 
 
 PROJECT_ROOT = Path(os.getenv("PROJECT_ROOT", "/Users/mriduljoshi/Github/morocco-psp"))
-PSYCH_DIR = PROJECT_ROOT / "outputs" / "pilot_psychometrics"
-ACTION_DIR = PROJECT_ROOT / "outputs" / "pilot_item_actions"
-REPORT_DIR = PROJECT_ROOT / "outputs" / "pilot_reports"
+OUTPUT_ROOT = Path(os.environ["PILOT_OUTPUT_ROOT"])
+PSYCH_DIR = OUTPUT_ROOT / "pilot_psychometrics"
+ACTION_DIR = OUTPUT_ROOT / "pilot_item_actions"
+REPORT_DIR = OUTPUT_ROOT / "pilot_reports"
 
 ACTION_COLUMNS = [
     "keep_as_stretch",

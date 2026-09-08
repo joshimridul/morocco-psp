@@ -1,0 +1,267 @@
+\section{How the IRT Outcomes Were Constructed}
+\label{app:irt}
+
+This appendix explains the measurement procedure in ordinary language. Its
+purpose is to place tests from different grades, survey rounds, and years on a
+common scale without changing the Year 1 results used in the earlier paper.
+Arabic, French, and mathematics remain separate outcomes; there is no claim
+that the three subjects measure one common skill.
+
+\subsection{The fixed Year 1 reference}
+
+The published Year 1 analysis supplies both the reference scale and the item
+parameters. The latter describe each question's difficulty and how sharply it
+distinguishes among students with different levels of achievement. We preserve
+the delivered Year 1 student scores and fix the parameters of 104 Arabic items,
+85 French items, and 66 mathematics items. The new estimation cannot change
+any of those 255 parameter pairs. Automated checks compare the saved values
+with the archived files to numerical precision on every run.
+
+We use the Year 1 endline comparison group as the reporting reference. Year 1
+baseline is not used because its scores are known to be less reliable. If
+\(\mu_s\) and \(\sigma_s\) are the Year 1 endline comparison-group mean and
+standard deviation in subject \(s\), the reported score is
+\[
+ Z_{psn}=\frac{\widehat\theta_{psn}-\mu_s}{\sigma_s}.
+\]
+The same \(\mu_s\) and \(\sigma_s\) are used for every later grade, round, and
+year in that subject. We therefore do not erase changes over time by
+standardizing each new test separately.
+
+\subsection{Responses and records included}
+
+Only questions recorded as correct or incorrect enter the IRT models. A value
+of 1 is correct, and a value of 0 is incorrect. The Stata code used for the
+assessments records ``do not know'' as the tagged missing value \texttt{.a}; we
+treat that response as incorrect. Other missing values remain missing. We
+exclude continuous measures, counts, oral-reading rates, rubric scores, and
+every other non-binary item. None is dichotomized for this analysis.
+
+If a source has duplicate records for the same student and test, the code keeps
+the record with the most answered eligible questions. It breaks any remaining
+tie using test duration and then source-row order. The number of source rows,
+retained rows, and removed duplicates is saved for every assessment group.
+
+\subsection{How one test is linked to another}
+
+An assessment group is a particular year, round, subject, grade, form, and
+sample. Different groups often answered different tests. They can be compared
+when they share questions whose content and scoring did not change. Such a
+question is an \emph{anchor}.
+
+The code first builds a network: assessment groups are the points and accepted
+anchors are the links. A group receives a score on the Year 1 scale only when
+there is an accepted path from that group to the fixed Year 1 bank. Item maps
+and decision logs record the evidence for each occurrence. The project team
+has confirmed that, in the operational Year 2 and Year 3 files, an unchanged
+item identifier denotes the same question, answer key, scoring, stimulus,
+format, and administration, and that an edited question receives a new
+identifier. The pipeline records this project decision rather than asking a
+statistical procedure to determine whether two identifiers denote the same
+question.
+
+\subsection{Allowing questions to behave differently}
+
+Even an unchanged question may work differently in another grade or round.
+This is called differential item functioning (DIF). The screening is completed
+before treatment effects are estimated. Where treatment status is available,
+the preferred screen uses comparison schools; an all-student screen is retained
+as a diagnostic. Each candidate anchor is checked with a logistic comparison
+and a Mantel--Haenszel comparison among students with similar performance on
+the other questions. We adjust for the number of tests with Holm's method and
+repeat the screen after removing flagged anchors, for at most three rounds.
+
+The preferred rule examines adjacent-grade differences and change between
+baseline and endline. A question is freed only when both the logistic and
+Mantel--Haenszel checks indicate DIF and the estimated difference is material.
+Freeing means that the implicated administration receives its own item
+parameters; the question is not discarded from every test.
+
+Statistical warnings cannot be used mechanically when a test shares only a
+small number of questions with the rest of the network. The preferred rule
+therefore aims to retain at least five verified anchors on every required link.
+After exact item-version mapping, a four-anchor link is allowed only when it is
+needed to connect an otherwise isolated assessment group. Questions retained
+because of this floor are explicitly flagged in the decision log. The same
+rule is applied to Arabic, French, and mathematics.
+
+This safeguard matters for Year 3 Arabic Grades 1 and 2. The baseline Grade 1
+and Grade 2 tests share 44 eligible binary questions; Grade 1 shares 41 between
+baseline and endline; and the Grade 2 baseline and endline tests share 11. An
+earlier, more conservative screen retained only 8, 4, and 2 anchors on the
+critical links and consequently left three Arabic assessment groups
+disconnected. The missing scores were therefore caused by the screening rule,
+not by missing tests, missing binary items, or changed item identifiers. The
+preferred consensus-and-connectivity rule restores these groups while keeping
+floor-retained questions visible for sensitivity analysis. Table~\ref{tab:mathlinks}
+shows the analogous link diagnostics for mathematics, where the network is
+also thin in places.
+
+\subsection{The preferred IRT model}
+
+We estimate a two-parameter logistic model. For student \(p\), question \(i\),
+and assessment group \(n\),
+\[
+ \Pr(X_{pin}=1\mid\theta_{pn})
+ =\operatorname{logit}^{-1}\!\left[a_i(\theta_{pn}-b_i)\right],
+\]
+where \(a_i\) is discrimination, \(b_i\) is difficulty, and
+\(\theta_{pn}\) is achievement. A student contributes only the questions on
+the test actually administered; questions from other forms are missing, not
+incorrect.
+
+There is one model per subject. Each model estimates the eligible Year 2 and
+Year 3 item parameters together, using all students, while keeping the Year 1
+parameters fixed. Estimating the tests together makes use of all links at once
+and avoids accumulating a new estimation error at every step in a chain. Once
+the item parameters are fixed, each assessment group receives its own estimated
+mean and variance. The model therefore does not force different grades or
+rounds to have the same achievement distribution.
+
+The preferred person score is the expected value of achievement given the
+student's response pattern (EAP). We also calculate a weighted-likelihood
+score (WLE) using exactly the same item model. This isolates the choice of
+person-score estimator from all anchor and item-parameter decisions. The WLE
+routine returned a finite score for every record but issued an iteration-limit
+warning for 95 of 56,183 response patterns across 20 assessment groups. We
+therefore report WLE as a stress test, not as a competing preferred score. The
+preferred EAP scores are unaffected by these warnings.
+
+The freely estimated discrimination parameters have a high numerical upper
+bound of 10. This prevents a few nearly separated response patterns from
+sending a parameter toward infinity; it is not an item-deletion rule. The cap
+does not apply to the fixed Year 1 parameters, which retain their archived
+values exactly. The diagnostic table reports how many new parameters reach the
+cap, and the alternative measurement methods show whether this stabilization
+matters for the treatment estimates. We do not report an unbounded calibration
+as though it were a completed robustness result.
+
+The Overall column is not a fourth IRT model. It stacks the three subject
+samples after each subject has been placed in Year 1 standard-deviation units.
+The subject columns estimate the same regression one subject at a time.
+
+\subsection{Why alternative scale locations do not drive the treatment effect}
+
+A weak link can change the origin of an assessment group's scale even when it
+barely changes student rankings. Adding the same constant to every treated and
+comparison student in a subject--grade--round group cannot change that group's
+treatment-versus-comparison contrast. In the subject-specific regressions,
+these common shifts are absorbed by the matched-pair-by-grade time controls.
+The Overall estimate also has nearly balanced subject shares across treatment
+arms, which is checked in the audit.
+
+Two qualifications matter. First, multiplying a score by a different scale
+factor does \emph{not} automatically cancel; it can rescale a treatment effect.
+Second, a missing link changes which students can be scored rather than merely
+moving the scale origin. We therefore do not rely on cancellation alone. We
+re-estimate the treatment effects under alternative links and models, and we
+compare IRT with the standardized sum score both on its full sample and on
+exactly the students used by the preferred IRT analysis. The robustness tables
+show directly whether scale factors or sample coverage matter in practice.
+
+\subsection{Validation and model diagnostics}
+
+The workflow stops if any preferred subject model fails to converge, if a
+linked group is not scored, if keys are duplicated, if a non-binary response
+enters estimation, if a Year 1 parameter changes, or if the reconstructed
+Ministry sum-score regressions fail their tie-out. It also records item-fit
+tests that accommodate missing responses, and calculates global fit and
+residual item-pair correlations separately within each administered test. These
+diagnostics are warnings rather than automatic deletion rules;
+Table~\ref{tab:irtdiagnostics} summarizes them. French has the largest share
+of item-fit warnings: 120 of 186 tested items. This is a substantive model-fit
+caution even though the treatment estimates are stable across measurement
+methods; agreement across methods does not by itself establish construct
+validity.
+
+The current form registry does not contain complete passage or stimulus
+identifiers for every question. Residual item-pair correlations can reveal
+possible local dependence, but they are not a substitute for a complete
+substantive testlet map. That documentation remains a stated review item rather
+than an assumption hidden in the code.
+
+The pipeline also reports 96 unmatched delivered Year 1 baseline score records
+in the Cohort 1 one-year panel, 67 in its two-year panel, and 24 in its
+three-year panel. These are disclosed as join-coverage warnings. Year 1
+endline is the scale reference, and every treatment regression requires an
+observed score in both rounds, so unmatched records are excluded rather than
+assigned a value.
+
+\subsection{Robustness methods}
+
+Table~\ref{tab:measurement_robustness} keeps the regression fixed and changes
+only the construction of the outcome. Its rows cover the choices over which a
+researcher could reasonably disagree:
+
+\begin{enumerate}
+  \item the preferred EAP score and the WLE score from the same item model;
+  \item estimating new item parameters with all students or only comparison
+  schools, then scoring both treatment arms;
+  \item estimating one model per subject or separate models by grade;
+  \item using the preferred anchor rule or a more conservative rule;
+  \item estimating all tests together, linking them sequentially, or requiring
+  a direct link to Year 1;
+  \item applying the targeted DIF procedure without the minimum-link safeguard,
+  or allowing a broader set of item parameters to differ;
+  \item estimating item parameters in a predetermined subset of schools and
+  scoring the remaining schools with those parameters;
+  \item using a broader item-match rule in the sequential and direct-link
+  approaches; and
+  \item using the Ministry's earlier standardized sum score, first on exactly
+  the preferred IRT sample and then on every available sum-score observation.
+\end{enumerate}
+
+The full-sample Ministry row deliberately preserves the earlier pooled
+weighting and fixed-effect implementation so that it can reproduce the tables
+already delivered. The preferred IRT and same-sample sum-score rows calculate
+equal-cohort weights within the outcome actually being estimated. This prevents
+a missing score in one subject from inadvertently changing that cohort's
+influence in another subject.
+
+The companion sample table reports the number of students retained by each
+method relative to the preferred IRT analysis. A dash means that a method does
+not connect every group needed for that comparison or that the prespecified
+regression cannot be estimated. The code never substitutes a different cohort,
+drops a required regression term, or calls an estimate based on fewer than
+three subjects an Overall effect.
+
+The preferred decision file contains 266 item-by-link rows whose parameters
+are allowed to differ, 39 rows retained to preserve a required link, and 2,868
+rows with a material difference that did not also satisfy the two-test
+statistical rule. These are administration-specific decisions, not counts of
+globally defective questions.
+
+We also registered two deliberately demanding models. A model that estimates a
+separate group distribution during joint calibration remains an unfinished,
+quarantined extension; no result from it is reported. A joint model based only
+on the broader item-ID rule
+converged under the declared numerical bound, but remains quarantined because
+that broader matching rule is not accepted anchor evidence. Both attempts
+remain in the method registry but are not treated as competing preferred estimates.
+A Rasch model was not treated as an
+interchangeable robustness outcome because it would replace the fixed Year 1
+two-parameter scale with a different measurement model and would require its
+own defensible link. Treatment-related DIF is also reserved for a later
+sensitivity analysis; treatment effects never determine the preferred anchors.
+
+Finally, the automated field \texttt{final\_outcome\_approved} remains zero.
+External release still requires confirmation of canonical source choices,
+completion of the Arabic and French occurrence review, and complete
+stimulus/testlet metadata. These gates concern scientific sign-off; they do not
+indicate a failed estimation or a numerical error in the treatment effects.
+
+\clearpage
+\begin{landscape}
+\input{tables/08_measurement_robustness.tex}
+\end{landscape}
+
+\clearpage
+\begin{landscape}
+\input{tables/09_measurement_sample_retention.tex}
+\end{landscape}
+
+\clearpage
+\input{tables/10_math_link_diagnostics.tex}
+
+\clearpage
+\input{tables/11_primary_irt_diagnostics.tex}

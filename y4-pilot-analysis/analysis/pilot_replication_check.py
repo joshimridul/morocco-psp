@@ -9,6 +9,7 @@ import pandas as pd
 
 
 PROJECT_ROOT = Path(os.getenv("PROJECT_ROOT", "/Users/mriduljoshi/Github/morocco-psp"))
+OUTPUT_ROOT = Path(os.environ["PILOT_OUTPUT_ROOT"])
 DATA_PATH = Path(
     os.getenv(
         "PILOT_DATA_PATH",
@@ -16,10 +17,10 @@ DATA_PATH = Path(
     )
 )
 
-PSYCH_DIR = PROJECT_ROOT / "outputs" / "pilot_psychometrics"
-ACTION_DIR = PROJECT_ROOT / "outputs" / "pilot_item_actions"
-LINK_DIR = PROJECT_ROOT / "outputs" / "pilot_vertical_linking"
-REPORT_DIR = PROJECT_ROOT / "outputs" / "pilot_reports"
+PSYCH_DIR = OUTPUT_ROOT / "pilot_psychometrics"
+ACTION_DIR = OUTPUT_ROOT / "pilot_item_actions"
+LINK_DIR = OUTPUT_ROOT / "pilot_vertical_linking"
+REPORT_DIR = OUTPUT_ROOT / "pilot_reports"
 
 TOL = 1e-7
 

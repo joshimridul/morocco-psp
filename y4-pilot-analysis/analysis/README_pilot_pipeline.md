@@ -10,7 +10,9 @@ Run the full pipeline with:
 python3 analysis/run_pilot_pipeline.py
 ```
 
-The runner sets `PROJECT_ROOT` and `PILOT_DATA_PATH` for all downstream scripts.
+The runner sets `PROJECT_ROOT`, `PILOT_DATA_PATH`, and `PILOT_OUTPUT_ROOT` for
+all downstream scripts. It reads the dedicated Dropbox work root from
+`config/paths.local.yml`; no generated file is written to GitHub.
 
 ## Script order
 
@@ -40,15 +42,15 @@ The runner sets `PROJECT_ROOT` and `PILOT_DATA_PATH` for all downstream scripts.
 
 ## Output folders
 
-- `outputs/pilot_psychometrics`
-- `outputs/pilot_vertical_linking`
-- `outputs/pilot_item_actions`
-- `outputs/pilot_reports`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_psychometrics`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_vertical_linking`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_item_actions`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_reports`
 
 ## Reporting outputs
 
-- `outputs/pilot_reports/team_full_report.md`
-- `outputs/pilot_reports/action_counts_by_subject_grade.csv`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_reports/team_full_report.md`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_reports/action_counts_by_subject_grade.csv`
 
 ## Independent replication check
 
@@ -60,6 +62,6 @@ python3 analysis/pilot_replication_check.py
 
 This writes:
 
-- `outputs/pilot_reports/replication_check_report.md`
-- `outputs/pilot_reports/replication_check_details.csv`
-- `outputs/pilot_reports/replication_irt_refit_summary.csv`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_reports/replication_check_report.md`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_reports/replication_check_details.csv`
+- `<work_root>/outputs/y4_pilot_analysis/pilot_reports/replication_irt_refit_summary.csv`

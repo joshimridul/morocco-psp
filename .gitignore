@@ -1,0 +1,34 @@
+config/paths.local.yml
+.env
+.env.*
+
+# No project data, assessment content, or data-bearing outputs in Git.
+data/**
+private/**
+local/**
+scratch/**
+tmp/**
+derived/**
+# Generated output directories at any depth belong in the configured Dropbox
+# work root, never in the repository.
+**/outputs/**
+logs/**
+*.log
+
+*.dta
+*.ster
+*.sav
+*.sas7bdat
+*.rds
+*.RData
+*.parquet
+*.feather
+*.arrow
+
+.DS_Store
+node_modules/
+.Rhistory
+.RDataTmp
+.venv/
+__pycache__/
+.ipynb_checkpoints/

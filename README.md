@@ -1,6 +1,8 @@
 # Morocco Assessment Item and Anchor Audit — GitHub-Safe Codex Project
 
-This repository contains **new code and documentation only**. The Year 1, Year 2, and Year 3 data and legacy files remain in Dropbox.
+This private repository contains new code, documentation, configuration
+templates, and project-lead-approved item maps. The Year 1, Year 2, and Year 3
+data and legacy files remain in Dropbox.
 
 The immediate objective is to use verified Year 3 data and item materials to evaluate item performance, identify defensible anchors, and improve the recommendations sent to the Moroccan Ministry of Education. A later phase will determine whether Year 1–Year 3 can support linked or multi-group IRT analyses across different papers, samples, cohorts, grades, and waves.
 
@@ -10,8 +12,13 @@ The immediate objective is to use verified Year 3 data and item materials to eva
 - No new output may be written inside those roots.
 - All generated data-bearing files go to a separate Dropbox working root.
 - All new code, tests, and documentation go to GitHub.
-- No student data, item maps, instruments, answer keys, secure item text, or data-bearing outputs go to GitHub.
-- Legacy `.do` and `.R` files are not opened or executed until the project lead authorizes a separate audit phase.
+- No student data, instruments, answer keys, secure item text, or data-bearing
+  outputs go to GitHub. Project-lead-approved item maps may be tracked when
+  they contain only the metadata needed for reproducibility.
+- Legacy `.do` and `.R` files are opened or executed only after the project
+  lead authorizes a separate audit phase. That authorization was given for the
+  read-only Year 1 lineage and Year 3 Ministry-specification audits documented
+  in this repository.
 
 Read `docs/DROPBOX_Y1_Y2_Y3_DATA_AND_CODE_ARCHITECTURE.md` before doing any work.
 
@@ -35,3 +42,46 @@ Read `docs/DROPBOX_Y1_Y2_Y3_DATA_AND_CODE_ARCHITECTURE.md` before doing any work
 8. Build the Y1–Y3 form-and-sample link graph before considering pooled or linked IRT.
 
 Use the revised first prompt in `PROMPTS.md`.
+
+## Reproducible IRT and regression workflow
+
+The production measurement build is documented in
+[`docs/IRT_PIPELINE_README.md`](docs/IRT_PIPELINE_README.md). From the repository
+root, run:
+
+```bash
+Rscript src/21_y1_y3_irt/run_irt_pipeline.R config/paths.local.yml
+```
+
+After that command completes successfully, the Ministry-format regression and
+report build is documented in
+[`docs/MINISTRY_IRT_REGRESSION_PIPELINE.md`](docs/MINISTRY_IRT_REGRESSION_PIPELINE.md).
+Run:
+
+```bash
+/Applications/StataNow/StataMP.app/Contents/MacOS/stata-mp -b do \
+  src/30_ministry_irt_report/00_master.do \
+  /Users/mriduljoshi/Github/morocco-psp 1 0
+```
+
+The first command creates and validates the outcomes. The second refreshes the
+analysis panels, estimates every prespecified regression family, reproduces the
+earlier standardized-sum-score results as a benchmark, writes the LaTeX tables,
+runs regression QA, and compiles the PDF. Neither command writes to a legacy
+Dropbox root.
+
+## Repository data guard
+
+Before committing, enable the repository's data-boundary hook once:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+The hook rejects generated-output directories, analysis-data formats, and
+unapproved structured data files. Project-lead-approved item maps are an
+explicit exception. Run the same check over the current tracked tree with:
+
+```bash
+python3 scripts/check_repository_data_boundary.py --all-tracked
+```

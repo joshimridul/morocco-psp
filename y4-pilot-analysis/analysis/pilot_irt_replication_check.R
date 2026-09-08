@@ -4,11 +4,13 @@ suppressPackageStartupMessages({
 })
 
 project_root <- Sys.getenv("PROJECT_ROOT", unset = "/Users/mriduljoshi/Github/morocco-psp")
+output_root <- Sys.getenv("PILOT_OUTPUT_ROOT")
+if (!nzchar(output_root)) stop("PILOT_OUTPUT_ROOT must be set by run_pilot_pipeline.py")
 input_path <- Sys.getenv(
   "PILOT_DATA_PATH",
   unset = "/Users/mriduljoshi/Dropbox/DID - Morocco Pioneer Schools Year 3/4 - Data processing/03_Pilot/Clean/pilot_clean_20260518_mji.dta"
 )
-report_dir <- file.path(project_root, "outputs", "pilot_reports")
+report_dir <- file.path(output_root, "pilot_reports")
 dir.create(report_dir, recursive = TRUE, showWarnings = FALSE)
 
 binary_flag <- function(x) {
