@@ -21,6 +21,24 @@ class PathGuardTest(unittest.TestCase):
             result = path_guard.assert_output_path(output, work, [source])
             self.assertEqual(result, output.resolve())
 
+    def test_approved_work_root_nested_in_source_is_allowed(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            source = base / "source"
+            work = source / "analysis" / "approved-work-root"
+            output = work / "outputs" / "table.csv"
+            result = path_guard.assert_output_path(output, work, [source])
+            self.assertEqual(result, output.resolve())
+
+    def test_nested_work_root_does_not_allow_source_sibling(self):
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            source = base / "source"
+            work = source / "analysis" / "approved-work-root"
+            sibling = source / "raw" / "new.csv"
+            with self.assertRaises(ValueError):
+                path_guard.assert_output_path(sibling, work, [source])
+
     def test_output_in_source_root_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             base = Path(temp)

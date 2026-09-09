@@ -41,7 +41,11 @@ assert_output <- function(path) {
   if (!is_within(candidate, work_root) || identical(candidate, work_root)) {
     stop("Output must be below work_root")
   }
-  if (any(vapply(source_roots, function(root) is_within(candidate, root), logical(1)))) {
+  if (any(vapply(
+    source_roots,
+    function(root) is_within(candidate, root) && !is_within(work_root, root),
+    logical(1)
+  ))) {
     stop("Output resolves inside a source root")
   }
   candidate

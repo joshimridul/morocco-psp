@@ -51,6 +51,10 @@ dropbox:
 
 Tracked code should refer only to `y1_root`, `y2_root`, `y3_root`, and `work_root`. The local configuration file must be excluded by `.gitignore`.
 
+If the project lead explicitly approves a `work_root` nested below one of the
+legacy roots, path guards treat only that exact configured subtree as writable.
+All parent, sibling, raw-data, and other legacy locations remain read-only.
+
 ## 4. Storage boundary
 
 ### 4.1 Dropbox is the data layer

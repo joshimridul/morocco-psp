@@ -84,6 +84,19 @@ class ReleaseInvariantTest(unittest.TestCase):
         self.assertLess(gate, cache_branch)
         self.assertIn('00_master_`run_stamp\'.log', master)
 
+    def test_legacy_handoff_uses_exact_historical_merge_key(self):
+        builder = self.read(
+            "src/22_treatment_effects/prepare_ministry_multiyear_irt_panels.R"
+        )
+        helper = self.read(
+            "src/30_ministry_irt_report/apply_irt_to_ministry_loaded_data.do"
+        )
+        self.assertIn('"ministry_irt_score_merge.dta"', builder)
+        self.assertIn('anyDuplicated(legacy_merge[c("id_student_panel", "wave")])', builder)
+        self.assertIn("isid id_student_panel wave", helper)
+        self.assertIn("merge 1:1 id_student_panel wave", helper)
+        self.assertIn("replace score = irt_primary", helper)
+
     def test_repository_guard_checks_index_paths_even_if_worktree_file_is_absent(self):
         guard = self.read("scripts/check_repository_data_boundary.py")
         self.assertNotIn("(REPO_ROOT / path).is_file()", guard)

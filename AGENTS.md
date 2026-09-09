@@ -28,7 +28,11 @@ Until the project lead explicitly authorizes the legacy-code phase:
 ## Non-negotiable storage and safety rules
 
 1. Treat the Year 1, Year 2, and Year 3 Dropbox roots as read-only source systems. Never edit, overwrite, rename, move, delete, archive, or reorganize any file in them.
-2. Never write a generated file anywhere under the three legacy roots. All data-bearing outputs belong under the dedicated Dropbox `work_root` configured in `config/paths.local.yml`.
+2. Never write a generated file anywhere under the three legacy roots, except
+   below the exact project-lead-approved Dropbox `work_root` configured in
+   `config/paths.local.yml`. When that work root is nested below a legacy root,
+   only its descendants are writable; its parents, siblings, and every other
+   legacy location remain read-only.
 3. New code, tests, documentation, configuration templates, and
    project-lead-approved metadata-only item maps belong in GitHub. No student
    data, instruments, answer keys, secure item text, direct identifiers, or

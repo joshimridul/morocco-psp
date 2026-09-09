@@ -43,7 +43,7 @@ assert_work_input <- function(path) {
 assert_output <- function(path) {
   candidate <- normalize_for_guard(path)
   if (!is_within(candidate, work_root) || identical(candidate, work_root)) stop("Output must be below work_root")
-  if (any(map_lgl(source_roots, ~ is_within(candidate, .x)))) stop("Output inside a legacy source root")
+  if (any(map_lgl(source_roots, ~ is_within(candidate, .x) && !is_within(work_root, .x)))) stop("Output inside a legacy source root")
   candidate
 }
 
@@ -341,6 +341,7 @@ stable_definitions <- imap(stable_final_panels, function(panel_id, cohort_value)
 coverage_rows <- list()
 panel_rows <- list()
 stable_audit_rows <- list()
+legacy_merge_rows <- list()
 for (index in seq_len(nrow(analysis_specs))) {
   spec <- analysis_specs[index, ]
   raw <- read_dta(spec$path[[1]])
@@ -393,6 +394,16 @@ for (index in seq_len(nrow(analysis_specs))) {
 
   output_path <- assert_output(file.path(panel_dir, paste0(spec$panel_id[[1]], "_irt_panel.dta")))
   write_dta(panel, output_path, version = 15)
+  legacy_merge_rows[[spec$panel_id[[1]]]] <- panel %>%
+    transmute(
+      id_student_panel = as.character(student_id),
+      wave = as.character(wave),
+      irt_subject = suppressWarnings(as.integer(subject)),
+      irt_grade = suppressWarnings(as.integer(grade)),
+      irt_primary = as.numeric(irt_primary),
+      irt_source_panel = spec$panel_id[[1]]
+    ) %>%
+    filter(is.finite(irt_primary))
   stable_audit_rows[[spec$panel_id[[1]]]] <- panel %>%
     filter(stable_sample == 1L) %>%
     summarise(
@@ -418,9 +429,55 @@ panel_registry <- bind_rows(panel_rows)
 stable_audit <- bind_rows(stable_audit_rows) %>%
   select(panel_id, cohort, exposure, stable_student_n, stable_school_n, stable_pair_n)
 
+# Minimal score-only handoff for the original monolithic Ministry do-file.
+# The old combined data become unique on id_student_panel + wave after applying
+# their documented duplicate exclusions. Repeated appearances across our six
+# panels must agree exactly before one row per historical key is exported.
+legacy_merge_long <- bind_rows(legacy_merge_rows)
+legacy_merge_conflicts <- legacy_merge_long %>%
+  group_by(id_student_panel, wave) %>%
+  summarise(
+    score_n = n_distinct(irt_primary),
+    subject_n = n_distinct(irt_subject),
+    grade_n = n_distinct(irt_grade),
+    .groups = "drop"
+  ) %>%
+  filter(score_n != 1L | subject_n != 1L | grade_n != 1L)
+if (nrow(legacy_merge_conflicts)) {
+  stop("Conflicting IRT values across Ministry design panels for a historical merge key")
+}
+legacy_merge <- legacy_merge_long %>%
+  group_by(id_student_panel, wave) %>%
+  summarise(
+    irt_primary = first(irt_primary),
+    irt_subject = first(irt_subject),
+    irt_grade = first(irt_grade),
+    irt_source_panel_n = n_distinct(irt_source_panel),
+    .groups = "drop"
+  ) %>%
+  arrange(id_student_panel, wave)
+if (anyDuplicated(legacy_merge[c("id_student_panel", "wave")])) {
+  stop("Ministry merge handoff is not unique on id_student_panel + wave")
+}
+legacy_merge_path <- assert_output(file.path(panel_dir, "ministry_irt_score_merge.dta"))
+write_dta(legacy_merge, legacy_merge_path, version = 15)
+
 write_csv(coverage, assert_output(file.path(out_root, "irt_panel_score_coverage.csv")), na = "")
 write_csv(panel_registry, assert_output(file.path(out_root, "ministry_analysis_panel_registry.csv")), na = "")
 write_csv(stable_audit, assert_output(file.path(out_root, "stable_sample_reconstruction_audit.csv")), na = "")
+write_csv(
+  tibble(
+    derived_file = basename(legacy_merge_path),
+    merge_key = "id_student_panel + wave after the historical duplicate exclusions",
+    score_variable = "irt_primary",
+    row_n = nrow(legacy_merge),
+    unique_key_n = n_distinct(paste(legacy_merge$id_student_panel, legacy_merge$wave, sep = "|")),
+    missing_score_n = sum(is.na(legacy_merge$irt_primary)),
+    status = "merge_ready"
+  ),
+  assert_output(file.path(out_root, "ministry_irt_score_merge_audit.csv")),
+  na = ""
+)
 write_csv(
   tibble(
     source_file = basename(stable_membership_source),

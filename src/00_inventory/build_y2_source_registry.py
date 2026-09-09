@@ -136,7 +136,10 @@ def main() -> None:
     out_dir = paths["work_root"] / "outputs/y1_y3_irt/00_y2_sources"
     if not within(out_dir.resolve(), paths["work_root"]):
         raise ValueError("Output must be below work_root")
-    if any(within(out_dir.resolve(), root) for root in source_roots):
+    if any(
+        within(out_dir.resolve(), root) and not within(paths["work_root"], root)
+        for root in source_roots
+    ):
         raise ValueError("Output cannot be inside a legacy source root")
     out_dir.mkdir(parents=True, exist_ok=True)
 

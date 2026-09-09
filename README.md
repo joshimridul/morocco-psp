@@ -25,7 +25,9 @@ Read `docs/DROPBOX_Y1_Y2_Y3_DATA_AND_CODE_ARCHITECTURE.md` before doing any work
 ## Local setup
 
 1. Copy `config/paths.example.yml` to `config/paths.local.yml`.
-2. Enter the local Dropbox roots and a separate Dropbox `work_root`.
+2. Enter the local Dropbox roots and the project-lead-approved Dropbox
+   `work_root`. It may be nested in a source tree only when that exact subtree
+   has been explicitly approved for generated outputs.
 3. Confirm that `config/paths.local.yml` remains untracked.
 4. Do not copy or symlink Dropbox files into this repository.
 5. Complete `docs/STUDY_DESIGN.md` and review `config/analysis.yml`.

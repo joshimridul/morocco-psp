@@ -36,7 +36,7 @@ assert_output <- function(path) {
   if (!is_within(candidate, work_root) || identical(candidate, work_root)) {
     stop("Validation output must be below work_root")
   }
-  if (any(map_lgl(source_roots, ~ is_within(candidate, .x)))) {
+  if (any(map_lgl(source_roots, ~ is_within(candidate, .x) && !is_within(work_root, .x)))) {
     stop("Validation output resolves inside a source root")
   }
   candidate

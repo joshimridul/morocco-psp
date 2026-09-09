@@ -60,7 +60,14 @@ def assert_output_path(
     candidate = resolved(path)
     if not is_within(candidate, work_root) or candidate == resolved(work_root):
         raise ValueError(f"Output must be below the dedicated work root: {candidate}")
-    if any(is_within(candidate, root) for root in source_roots):
+    # A project-lead-approved work root may itself be nested below a legacy
+    # root. In that case, only the explicitly configured work-root subtree is
+    # writable; the leading containment check still rejects every sibling,
+    # parent, and other location below the legacy root.
+    if any(
+        is_within(candidate, root) and not is_within(work_root, root)
+        for root in source_roots
+    ):
         raise ValueError(f"Output resolves inside a legacy root: {candidate}")
     if any(candidate == resolved(input_path) for input_path in inputs):
         raise ValueError(f"Output equals an input path: {candidate}")

@@ -46,7 +46,7 @@ assert_work_input <- function(path) {
 assert_output <- function(path) {
   candidate <- normalizePath(path, mustWork = FALSE)
   if (!is_within(candidate, work_root) || identical(candidate, work_root)) stop("Output must be below work_root")
-  if (any(map_lgl(source_roots, ~ is_within(candidate, .x)))) stop("Output inside a source root")
+  if (any(map_lgl(source_roots, ~ is_within(candidate, .x) && !is_within(work_root, .x)))) stop("Output inside a source root")
   candidate
 }
 label_character <- function(x) as.character(haven::as_factor(x))

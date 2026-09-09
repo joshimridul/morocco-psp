@@ -109,3 +109,20 @@ Outputs are under:
 - `estimates/`: aggregate `.dta` and `.csv` result files plus selected controls.
 - `qa/`: adversarial checks and Ministry sum-score tie-out.
 - `logs/`: Stata and LaTeX logs.
+
+## Legacy-code handoff
+
+The original monolithic sum-score do-file begins from
+`y1y2y3_tested_data.dta`. For a minimal-change replication, let the original
+code complete its duplicate exclusions, raw-score construction, and control
+merges, then merge the generated
+`analysis_inputs/ministry_irt_score_merge.dta` on
+`id_student_panel wave`. The merge file is unique on those keys and contains
+the preferred score as `irt_primary`, plus subject and grade fields used only
+for merge assertions.
+
+The helper `apply_irt_to_ministry_loaded_data.do` performs this merge and replaces
+`score`, `arabic_score`, `french_score`, and `math_score` in memory. It must run
+immediately before the old code's `tempfile data` / `save data` lines, and thus
+before it constructs baseline scores, baseline quartiles, or analysis panels.
+It never saves over the historical combined dataset.
